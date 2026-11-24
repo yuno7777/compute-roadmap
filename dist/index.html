@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Learn how computers work, from moving charge and logic gates to operating systems, GPUs, and modern AI.">
+<meta name="theme-color" content="#111310">
+<title>COMPUTE | From electrons to AI</title>
+<link rel="stylesheet" href="./style.css">
+<script type="module" src="./app.mjs"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+  <button id="menu" class="plain square" type="button" aria-label="Toggle curriculum" aria-expanded="true">☰</button>
+  <a class="brand" href="#" aria-label="COMPUTE home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>COMPUTE</a>
+  <nav class="top-nav" aria-label="Main"><a href="#roadmap">Roadmap</a><a href="#graph">Graph</a><a href="#glossary">Glossary</a><a href="#practice">Practice</a></nav>
+  <button id="theme" type="button" class="plain" aria-label="Toggle light or dark theme">Theme</button>
+</header>
+<div class="layout">
+  <aside id="sidebar" aria-label="Curriculum">
+    <div class="aside-top"><strong>Curriculum</strong><span id="progress-label"></span>
+    <progress id="progress" value="0" max="1" aria-labelledby="progress-label"></progress></div>
+    <nav id="modules" aria-label="Course modules"></nav>
+  </aside>
+  <main id="main" tabindex="-1"></main>
+</div>
+<noscript><p class="noscript">Enable JavaScript to open the curriculum and simulations.</p></noscript>
+</body></html>

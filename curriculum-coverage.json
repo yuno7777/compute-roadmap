@@ -1,0 +1,1799 @@
+{
+  "schemaVersion": 1,
+  "modulesTotal": 24,
+  "lessonsPublished": 39,
+  "lessonsPlanned": 33,
+  "labsImplemented": 38,
+  "assessmentItems": 51,
+  "modules": [
+    {
+      "id": "electricity",
+      "title": "Physics & electricity",
+      "prerequisites": [],
+      "learningOutcome": "Trace energy and charge through a circuit.",
+      "status": "complete",
+      "chapters": [
+        {
+          "id": "electricity-1",
+          "title": "Electrons and charge",
+          "topics": [
+            {
+              "title": "Electrons and charge",
+              "lessonIds": [
+                "electricity-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "electricity-1",
+              "title": "What is an electron?",
+              "status": "complete",
+              "lab": "charge",
+              "assessmentItems": 2
+            }
+          ]
+        },
+        {
+          "id": "electricity-2",
+          "title": "Voltage, current and resistance",
+          "topics": [
+            {
+              "title": "Voltage, current and resistance",
+              "lessonIds": [
+                "electricity-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "electricity-2",
+              "title": "Voltage, current and resistance",
+              "status": "complete",
+              "lab": "ohm",
+              "assessmentItems": 2
+            }
+          ]
+        },
+        {
+          "id": "electricity-3",
+          "title": "Fields, signals and capacitance",
+          "topics": [
+            {
+              "title": "Fields, signals and capacitance",
+              "lessonIds": [
+                "electricity-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "electricity-3",
+              "title": "Fields, signals and capacitance",
+              "status": "complete",
+              "lab": "rc",
+              "assessmentItems": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "semiconductors",
+      "title": "Semiconductors",
+      "prerequisites": [
+        "electricity"
+      ],
+      "learningOutcome": "Explain how an electric field controls current.",
+      "status": "partial",
+      "chapters": [
+        {
+          "id": "semiconductors-1",
+          "title": "Silicon, doping and junctions",
+          "topics": [
+            {
+              "title": "Silicon, doping and junctions",
+              "lessonIds": [
+                "semiconductors-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "semiconductors-1",
+              "title": "Silicon, doping and junctions",
+              "status": "complete",
+              "lab": "diode",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "semiconductors-2",
+          "title": "MOSFETs and CMOS",
+          "topics": [
+            {
+              "title": "MOSFETs and CMOS",
+              "lessonIds": [
+                "semiconductors-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "semiconductors-2",
+              "title": "MOSFETs and CMOS",
+              "status": "complete",
+              "lab": "cmos",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "semiconductors-3",
+          "title": "Diodes, BJTs and fabrication",
+          "topics": [
+            {
+              "title": "Diodes, BJTs and fabrication",
+              "lessonIds": [
+                "semiconductors-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "semiconductors-3",
+              "title": "Diodes, BJTs and fabrication",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "digital",
+      "title": "Digital electronics",
+      "prerequisites": [
+        "semiconductors"
+      ],
+      "learningOutcome": "Build combinational and sequential logic.",
+      "status": "complete",
+      "chapters": [
+        {
+          "id": "digital-1",
+          "title": "Logic gates and Boolean algebra",
+          "topics": [
+            {
+              "title": "Logic gates and Boolean algebra",
+              "lessonIds": [
+                "digital-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "digital-1",
+              "title": "Logic gates and Boolean algebra",
+              "status": "complete",
+              "lab": "logic",
+              "assessmentItems": 2
+            }
+          ]
+        },
+        {
+          "id": "digital-2",
+          "title": "Adders and multiplexers",
+          "topics": [
+            {
+              "title": "Adders and multiplexers",
+              "lessonIds": [
+                "digital-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "digital-2",
+              "title": "Adders and multiplexers",
+              "status": "complete",
+              "lab": "alu",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "digital-3",
+          "title": "Flip-flops, registers and clocks",
+          "topics": [
+            {
+              "title": "Flip-flops, registers and clocks",
+              "lessonIds": [
+                "digital-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "digital-3",
+              "title": "Flip-flops, registers and clocks",
+              "status": "complete",
+              "lab": "flip",
+              "assessmentItems": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "representation",
+      "title": "Information representation",
+      "prerequisites": [
+        "digital"
+      ],
+      "learningOutcome": "Interpret identical bits under different encodings.",
+      "status": "partial",
+      "chapters": [
+        {
+          "id": "representation-1",
+          "title": "Binary, hex and signed integers",
+          "topics": [
+            {
+              "title": "Binary, hex and signed integers",
+              "lessonIds": [
+                "representation-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "representation-1",
+              "title": "Binary, hex and signed integers",
+              "status": "complete",
+              "lab": "bits",
+              "assessmentItems": 2
+            }
+          ]
+        },
+        {
+          "id": "representation-2",
+          "title": "Floating-point representation",
+          "topics": [
+            {
+              "title": "Floating-point representation",
+              "lessonIds": [
+                "representation-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "representation-2",
+              "title": "Floating-point representation",
+              "status": "complete",
+              "lab": "float",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "representation-3",
+          "title": "Text, compression and error correction",
+          "topics": [
+            {
+              "title": "Text, compression and error correction",
+              "lessonIds": [
+                "representation-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "representation-3",
+              "title": "Text, compression and error correction",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "title": "Computer architecture",
+      "prerequisites": [
+        "digital",
+        "representation"
+      ],
+      "learningOutcome": "Follow an instruction through a processor.",
+      "status": "partial",
+      "chapters": [
+        {
+          "id": "architecture-1",
+          "title": "The instruction cycle",
+          "topics": [
+            {
+              "title": "The instruction cycle",
+              "lessonIds": [
+                "architecture-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "architecture-1",
+              "title": "The instruction cycle",
+              "status": "complete",
+              "lab": "cpu",
+              "assessmentItems": 2
+            }
+          ]
+        },
+        {
+          "id": "architecture-2",
+          "title": "ALU, buses and control",
+          "topics": [
+            {
+              "title": "ALU, buses and control",
+              "lessonIds": [
+                "architecture-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "architecture-2",
+              "title": "ALU, buses and control",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        },
+        {
+          "id": "architecture-3",
+          "title": "Memory architectures and I/O",
+          "topics": [
+            {
+              "title": "Memory architectures and I/O",
+              "lessonIds": [
+                "architecture-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "architecture-3",
+              "title": "Memory architectures and I/O",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "assembly",
+      "title": "Assembly & machine code",
+      "prerequisites": [
+        "architecture"
+      ],
+      "learningOutcome": "Relate instructions, registers, memory and calls.",
+      "status": "partial",
+      "chapters": [
+        {
+          "id": "assembly-1",
+          "title": "Instructions and addressing",
+          "topics": [
+            {
+              "title": "Instructions and addressing",
+              "lessonIds": [
+                "assembly-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "assembly-1",
+              "title": "Instructions and addressing",
+              "status": "complete",
+              "lab": "cpu",
+              "assessmentItems": 2
+            }
+          ]
+        },
+        {
+          "id": "assembly-2",
+          "title": "Stack, calls and ABI",
+          "topics": [
+            {
+              "title": "Stack, calls and ABI",
+              "lessonIds": [
+                "assembly-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "assembly-2",
+              "title": "Stack, calls and ABI",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        },
+        {
+          "id": "assembly-3",
+          "title": "x86-64, Arm and RISC-V",
+          "topics": [
+            {
+              "title": "x86-64, Arm and RISC-V",
+              "lessonIds": [
+                "assembly-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "assembly-3",
+              "title": "x86-64, Arm and RISC-V",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "memory",
+      "title": "Memory & storage",
+      "prerequisites": [
+        "architecture"
+      ],
+      "learningOutcome": "Predict locality and compare memory technologies.",
+      "status": "partial",
+      "chapters": [
+        {
+          "id": "memory-1",
+          "title": "Cache and locality",
+          "topics": [
+            {
+              "title": "Cache and locality",
+              "lessonIds": [
+                "memory-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "memory-1",
+              "title": "Cache and locality",
+              "status": "complete",
+              "lab": "cache",
+              "assessmentItems": 2
+            }
+          ]
+        },
+        {
+          "id": "memory-2",
+          "title": "SRAM, DRAM and ROM",
+          "topics": [
+            {
+              "title": "SRAM, DRAM and ROM",
+              "lessonIds": [
+                "memory-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "memory-2",
+              "title": "SRAM, DRAM and ROM",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        },
+        {
+          "id": "memory-3",
+          "title": "Flash, disks and storage interfaces",
+          "topics": [
+            {
+              "title": "Flash, disks and storage interfaces",
+              "lessonIds": [
+                "memory-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "memory-3",
+              "title": "Flash, disks and storage interfaces",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "modern-cpu",
+      "title": "Modern CPU architecture",
+      "prerequisites": [
+        "assembly",
+        "memory"
+      ],
+      "learningOutcome": "Explain how modern CPUs overlap and reorder work.",
+      "status": "partial",
+      "chapters": [
+        {
+          "id": "modern-cpu-1",
+          "title": "Pipelines and branch prediction",
+          "topics": [
+            {
+              "title": "Pipelines and branch prediction",
+              "lessonIds": [
+                "modern-cpu-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "modern-cpu-1",
+              "title": "Pipelines and branch prediction",
+              "status": "complete",
+              "lab": "pipeline",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "modern-cpu-2",
+          "title": "Superscalar and out-of-order execution",
+          "topics": [
+            {
+              "title": "Superscalar and out-of-order execution",
+              "lessonIds": [
+                "modern-cpu-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "modern-cpu-2",
+              "title": "Superscalar and out-of-order execution",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        },
+        {
+          "id": "modern-cpu-3",
+          "title": "SIMD, multicore and coherence",
+          "topics": [
+            {
+              "title": "SIMD, multicore and coherence",
+              "lessonIds": [
+                "modern-cpu-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "modern-cpu-3",
+              "title": "SIMD, multicore and coherence",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "os",
+      "title": "Operating systems",
+      "prerequisites": [
+        "assembly",
+        "memory"
+      ],
+      "learningOutcome": "Trace how an OS runs and isolates programs.",
+      "status": "partial",
+      "chapters": [
+        {
+          "id": "os-1",
+          "title": "Processes and scheduling",
+          "topics": [
+            {
+              "title": "Processes and scheduling",
+              "lessonIds": [
+                "os-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "os-1",
+              "title": "Processes and scheduling",
+              "status": "complete",
+              "lab": "schedule",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "os-2",
+          "title": "Virtual memory and page tables",
+          "topics": [
+            {
+              "title": "Virtual memory and page tables",
+              "lessonIds": [
+                "os-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "os-2",
+              "title": "Virtual memory and page tables",
+              "status": "complete",
+              "lab": "pages",
+              "assessmentItems": 2
+            }
+          ]
+        },
+        {
+          "id": "os-3",
+          "title": "Boot, drivers and filesystems",
+          "topics": [
+            {
+              "title": "Boot, drivers and filesystems",
+              "lessonIds": [
+                "os-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "os-3",
+              "title": "Boot, drivers and filesystems",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "languages",
+      "title": "Programming languages",
+      "prerequisites": [
+        "assembly",
+        "os"
+      ],
+      "learningOutcome": "Compare execution and memory models.",
+      "status": "complete",
+      "chapters": [
+        {
+          "id": "languages-1",
+          "title": "C, Rust and ownership",
+          "topics": [
+            {
+              "title": "C, Rust and ownership",
+              "lessonIds": [
+                "languages-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "languages-1",
+              "title": "C, Rust and ownership",
+              "status": "complete",
+              "lab": "lifetime",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "languages-2",
+          "title": "Python execution and objects",
+          "topics": [
+            {
+              "title": "Python execution and objects",
+              "lessonIds": [
+                "languages-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "languages-2",
+              "title": "Python execution and objects",
+              "status": "complete",
+              "lab": "binding",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "languages-3",
+          "title": "JavaScript and TypeScript runtimes",
+          "topics": [
+            {
+              "title": "JavaScript and TypeScript runtimes",
+              "lessonIds": [
+                "languages-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "languages-3",
+              "title": "JavaScript and TypeScript runtimes",
+              "status": "complete",
+              "lab": "eventloop",
+              "assessmentItems": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compilers",
+      "title": "Compilers & interpreters",
+      "prerequisites": [
+        "languages"
+      ],
+      "learningOutcome": "Follow code from characters to execution.",
+      "status": "partial",
+      "chapters": [
+        {
+          "id": "compilers-1",
+          "title": "Tokens, parsing and syntax trees",
+          "topics": [
+            {
+              "title": "Tokens, parsing and syntax trees",
+              "lessonIds": [
+                "compilers-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "compilers-1",
+              "title": "Tokens, parsing and syntax trees",
+              "status": "complete",
+              "lab": "parser",
+              "assessmentItems": 2
+            }
+          ]
+        },
+        {
+          "id": "compilers-2",
+          "title": "IR, LLVM and optimization",
+          "topics": [
+            {
+              "title": "IR, LLVM and optimization",
+              "lessonIds": [
+                "compilers-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "compilers-2",
+              "title": "IR, LLVM and optimization",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        },
+        {
+          "id": "compilers-3",
+          "title": "Linking, interpretation and JIT",
+          "topics": [
+            {
+              "title": "Linking, interpretation and JIT",
+              "lessonIds": [
+                "compilers-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "compilers-3",
+              "title": "Linking, interpretation and JIT",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "algorithms",
+      "title": "Data structures & algorithms",
+      "prerequisites": [
+        "languages"
+      ],
+      "learningOutcome": "Choose data structures based on cost and access patterns.",
+      "status": "partial",
+      "chapters": [
+        {
+          "id": "algorithms-1",
+          "title": "Complexity, search and sorting",
+          "topics": [
+            {
+              "title": "Complexity, search and sorting",
+              "lessonIds": [
+                "algorithms-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "algorithms-1",
+              "title": "Complexity, search and sorting",
+              "status": "complete",
+              "lab": "search",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "algorithms-2",
+          "title": "Arrays, lists and hash tables",
+          "topics": [
+            {
+              "title": "Arrays, lists and hash tables",
+              "lessonIds": [
+                "algorithms-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "algorithms-2",
+              "title": "Arrays, lists and hash tables",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        },
+        {
+          "id": "algorithms-3",
+          "title": "Trees, graphs and shortest paths",
+          "topics": [
+            {
+              "title": "Trees, graphs and shortest paths",
+              "lessonIds": [
+                "algorithms-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "algorithms-3",
+              "title": "Trees, graphs and shortest paths",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "networking",
+      "title": "Computer networking",
+      "prerequisites": [
+        "os"
+      ],
+      "learningOutcome": "Follow data across machines and protocol layers.",
+      "status": "partial",
+      "chapters": [
+        {
+          "id": "networking-1",
+          "title": "Packets, Ethernet and routing",
+          "topics": [
+            {
+              "title": "Packets, Ethernet and routing",
+              "lessonIds": [
+                "networking-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "networking-1",
+              "title": "Packets, Ethernet and routing",
+              "status": "complete",
+              "lab": "route",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "networking-2",
+          "title": "TCP, UDP and sockets",
+          "topics": [
+            {
+              "title": "TCP, UDP and sockets",
+              "lessonIds": [
+                "networking-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "networking-2",
+              "title": "TCP, UDP and sockets",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        },
+        {
+          "id": "networking-3",
+          "title": "DNS, HTTP and TLS",
+          "topics": [
+            {
+              "title": "DNS, HTTP and TLS",
+              "lessonIds": [
+                "networking-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "networking-3",
+              "title": "DNS, HTTP and TLS",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "title": "Databases",
+      "prerequisites": [
+        "algorithms",
+        "memory"
+      ],
+      "learningOutcome": "Trace indexing, query execution and durable writes.",
+      "status": "partial",
+      "chapters": [
+        {
+          "id": "databases-1",
+          "title": "B-trees and indexing",
+          "topics": [
+            {
+              "title": "B-trees and indexing",
+              "lessonIds": [
+                "databases-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "databases-1",
+              "title": "B-trees and indexing",
+              "status": "complete",
+              "lab": "index",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "databases-2",
+          "title": "Transactions, logs and isolation",
+          "topics": [
+            {
+              "title": "Transactions, logs and isolation",
+              "lessonIds": [
+                "databases-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "databases-2",
+              "title": "Transactions, logs and isolation",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        },
+        {
+          "id": "databases-3",
+          "title": "LSM engines, query plans and vector search",
+          "topics": [
+            {
+              "title": "LSM engines, query plans and vector search",
+              "lessonIds": [
+                "databases-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "databases-3",
+              "title": "LSM engines, query plans and vector search",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "distributed",
+      "title": "Concurrent & distributed systems",
+      "prerequisites": [
+        "os",
+        "networking"
+      ],
+      "learningOutcome": "Reason about ordering, replication and isolation.",
+      "status": "partial",
+      "chapters": [
+        {
+          "id": "distributed-1",
+          "title": "Threads, atomics and async",
+          "topics": [
+            {
+              "title": "Threads, atomics and async",
+              "lessonIds": [
+                "distributed-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "distributed-1",
+              "title": "Threads, atomics and async",
+              "status": "complete",
+              "lab": "race",
+              "assessmentItems": 2
+            }
+          ]
+        },
+        {
+          "id": "distributed-2",
+          "title": "Replication and consensus",
+          "topics": [
+            {
+              "title": "Replication and consensus",
+              "lessonIds": [
+                "distributed-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "distributed-2",
+              "title": "Replication and consensus",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        },
+        {
+          "id": "distributed-3",
+          "title": "Containers, VMs and distributed storage",
+          "topics": [
+            {
+              "title": "Containers, VMs and distributed storage",
+              "lessonIds": [
+                "distributed-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "distributed-3",
+              "title": "Containers, VMs and distributed storage",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "title": "Computer security",
+      "prerequisites": [
+        "languages",
+        "os",
+        "networking"
+      ],
+      "learningOutcome": "Use boundaries and verification to protect systems.",
+      "status": "partial",
+      "chapters": [
+        {
+          "id": "security-1",
+          "title": "Protection and memory safety",
+          "topics": [
+            {
+              "title": "Protection and memory safety",
+              "lessonIds": [
+                "security-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "security-1",
+              "title": "Protection and memory safety",
+              "status": "complete",
+              "lab": "bounds",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "security-2",
+          "title": "Cryptography and authentication",
+          "topics": [
+            {
+              "title": "Cryptography and authentication",
+              "lessonIds": [
+                "security-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "security-2",
+              "title": "Cryptography and authentication",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        },
+        {
+          "id": "security-3",
+          "title": "Hardware trust and isolation",
+          "topics": [
+            {
+              "title": "Hardware trust and isolation",
+              "lessonIds": [
+                "security-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "security-3",
+              "title": "Hardware trust and isolation",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "math",
+      "title": "Mathematical foundations",
+      "prerequisites": [
+        "representation"
+      ],
+      "learningOutcome": "Use the mathematics needed for algorithms, graphics and learning.",
+      "status": "complete",
+      "chapters": [
+        {
+          "id": "math-1",
+          "title": "Vectors and linear algebra",
+          "topics": [
+            {
+              "title": "Vectors and linear algebra",
+              "lessonIds": [
+                "math-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "math-1",
+              "title": "Vectors and linear algebra",
+              "status": "complete",
+              "lab": "vector",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "math-2",
+          "title": "Calculus and numerical methods",
+          "topics": [
+            {
+              "title": "Calculus and numerical methods",
+              "lessonIds": [
+                "math-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "math-2",
+              "title": "Calculus and numerical methods",
+              "status": "complete",
+              "lab": "derivative",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "math-3",
+          "title": "Probability, statistics and information",
+          "topics": [
+            {
+              "title": "Probability, statistics and information",
+              "lessonIds": [
+                "math-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "math-3",
+              "title": "Probability, statistics and information",
+              "status": "complete",
+              "lab": "entropy",
+              "assessmentItems": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "graphics",
+      "title": "Computer graphics",
+      "prerequisites": [
+        "math",
+        "algorithms"
+      ],
+      "learningOutcome": "Connect camera geometry to pixels.",
+      "status": "partial",
+      "chapters": [
+        {
+          "id": "graphics-1",
+          "title": "Pixels and rasterization",
+          "topics": [
+            {
+              "title": "Pixels and rasterization",
+              "lessonIds": [
+                "graphics-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "graphics-1",
+              "title": "Pixels and rasterization",
+              "status": "complete",
+              "lab": "raster",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "graphics-2",
+          "title": "Shaders and graphics pipelines",
+          "topics": [
+            {
+              "title": "Shaders and graphics pipelines",
+              "lessonIds": [
+                "graphics-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "graphics-2",
+              "title": "Shaders and graphics pipelines",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        },
+        {
+          "id": "graphics-3",
+          "title": "Ray tracing and displays",
+          "topics": [
+            {
+              "title": "Ray tracing and displays",
+              "lessonIds": [
+                "graphics-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "graphics-3",
+              "title": "Ray tracing and displays",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gpu",
+      "title": "GPU architecture & parallel computing",
+      "prerequisites": [
+        "memory",
+        "graphics"
+      ],
+      "learningOutcome": "Reason about GPU lane execution and data movement.",
+      "status": "partial",
+      "chapters": [
+        {
+          "id": "gpu-1",
+          "title": "SIMT, warps and divergence",
+          "topics": [
+            {
+              "title": "SIMT, warps and divergence",
+              "lessonIds": [
+                "gpu-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "gpu-1",
+              "title": "SIMT, warps and divergence",
+              "status": "complete",
+              "lab": "warp",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "gpu-2",
+          "title": "GPU memory and CUDA kernels",
+          "topics": [
+            {
+              "title": "GPU memory and CUDA kernels",
+              "lessonIds": [
+                "gpu-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "gpu-2",
+              "title": "GPU memory and CUDA kernels",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        },
+        {
+          "id": "gpu-3",
+          "title": "Tensor cores and accelerators",
+          "topics": [
+            {
+              "title": "Tensor cores and accelerators",
+              "lessonIds": [
+                "gpu-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "gpu-3",
+              "title": "Tensor cores and accelerators",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ml",
+      "title": "Machine learning",
+      "prerequisites": [
+        "math",
+        "algorithms"
+      ],
+      "learningOutcome": "Train a model and measure generalization.",
+      "status": "partial",
+      "chapters": [
+        {
+          "id": "ml-1",
+          "title": "Regression and gradient descent",
+          "topics": [
+            {
+              "title": "Regression and gradient descent",
+              "lessonIds": [
+                "ml-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "ml-1",
+              "title": "Regression and gradient descent",
+              "status": "complete",
+              "lab": "gradient",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "ml-2",
+          "title": "Classification and feature engineering",
+          "topics": [
+            {
+              "title": "Classification and feature engineering",
+              "lessonIds": [
+                "ml-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "ml-2",
+              "title": "Classification and feature engineering",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        },
+        {
+          "id": "ml-3",
+          "title": "Evaluation and statistical learning",
+          "topics": [
+            {
+              "title": "Evaluation and statistical learning",
+              "lessonIds": [
+                "ml-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "ml-3",
+              "title": "Evaluation and statistical learning",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dl",
+      "title": "Deep learning",
+      "prerequisites": [
+        "ml",
+        "gpu"
+      ],
+      "learningOutcome": "Trace a neural network’s forward and backward passes.",
+      "status": "partial",
+      "chapters": [
+        {
+          "id": "dl-1",
+          "title": "Neurons and backpropagation",
+          "topics": [
+            {
+              "title": "Neurons and backpropagation",
+              "lessonIds": [
+                "dl-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "dl-1",
+              "title": "Neurons and backpropagation",
+              "status": "complete",
+              "lab": "backprop",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "dl-2",
+          "title": "CNNs, RNNs and optimization",
+          "topics": [
+            {
+              "title": "CNNs, RNNs and optimization",
+              "lessonIds": [
+                "dl-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "dl-2",
+              "title": "CNNs, RNNs and optimization",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        },
+        {
+          "id": "dl-3",
+          "title": "Attention and learned representations",
+          "topics": [
+            {
+              "title": "Attention and learned representations",
+              "lessonIds": [
+                "dl-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "dl-3",
+              "title": "Attention and learned representations",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ai",
+      "title": "Modern AI architectures",
+      "prerequisites": [
+        "dl"
+      ],
+      "learningOutcome": "Explain how modern models represent and mix tokens.",
+      "status": "partial",
+      "chapters": [
+        {
+          "id": "ai-1",
+          "title": "Tokenization and embeddings",
+          "topics": [
+            {
+              "title": "Tokenization and embeddings",
+              "lessonIds": [
+                "ai-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "ai-1",
+              "title": "Tokenization and embeddings",
+              "status": "complete",
+              "lab": "token",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "ai-2",
+          "title": "Transformer attention",
+          "topics": [
+            {
+              "title": "Transformer attention",
+              "lessonIds": [
+                "ai-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "ai-2",
+              "title": "Transformer attention",
+              "status": "complete",
+              "lab": "attention",
+              "assessmentItems": 2
+            }
+          ]
+        },
+        {
+          "id": "ai-3",
+          "title": "MoE, multimodal and recurrent models",
+          "topics": [
+            {
+              "title": "MoE, multimodal and recurrent models",
+              "lessonIds": [
+                "ai-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "ai-3",
+              "title": "MoE, multimodal and recurrent models",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "inference",
+      "title": "AI training & inference systems",
+      "prerequisites": [
+        "ai",
+        "distributed"
+      ],
+      "learningOutcome": "Explain the tradeoffs in training and serving models.",
+      "status": "complete",
+      "chapters": [
+        {
+          "id": "inference-1",
+          "title": "Pretraining, fine-tuning and RL",
+          "topics": [
+            {
+              "title": "Pretraining, fine-tuning and RL",
+              "lessonIds": [
+                "inference-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "inference-1",
+              "title": "Pretraining, fine-tuning and reinforcement learning",
+              "status": "complete",
+              "lab": "objective",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "inference-2",
+          "title": "Inference and KV caches",
+          "topics": [
+            {
+              "title": "Inference and KV caches",
+              "lessonIds": [
+                "inference-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "inference-2",
+              "title": "Autoregressive inference and KV caches",
+              "status": "complete",
+              "lab": "kv",
+              "assessmentItems": 2
+            }
+          ]
+        },
+        {
+          "id": "inference-3",
+          "title": "Quantization and model compression",
+          "topics": [
+            {
+              "title": "Quantization and model compression",
+              "lessonIds": [
+                "inference-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "inference-3",
+              "title": "Quantization and model compression",
+              "status": "complete",
+              "lab": "quant",
+              "assessmentItems": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frontiers",
+      "title": "Modern computing frontiers",
+      "prerequisites": [
+        "modern-cpu",
+        "gpu",
+        "inference"
+      ],
+      "learningOutcome": "Compare future computing technologies by what they accelerate.",
+      "status": "partial",
+      "chapters": [
+        {
+          "id": "frontiers-1",
+          "title": "Chiplets and advanced fabrication",
+          "topics": [
+            {
+              "title": "Chiplets and advanced fabrication",
+              "lessonIds": [
+                "frontiers-1"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "frontiers-1",
+              "title": "Chiplets and advanced fabrication",
+              "status": "complete",
+              "lab": "yield",
+              "assessmentItems": 1
+            }
+          ]
+        },
+        {
+          "id": "frontiers-2",
+          "title": "NPUs, TPUs and neuromorphic hardware",
+          "topics": [
+            {
+              "title": "NPUs, TPUs and neuromorphic hardware",
+              "lessonIds": [
+                "frontiers-2"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "frontiers-2",
+              "title": "NPUs, TPUs and neuromorphic hardware",
+              "status": "planned",
+              "lab": null,
+              "assessmentItems": 0
+            }
+          ]
+        },
+        {
+          "id": "frontiers-3",
+          "title": "Quantum computing and emerging architectures",
+          "topics": [
+            {
+              "title": "Quantum computing and emerging architectures",
+              "lessonIds": [
+                "frontiers-3"
+              ]
+            }
+          ],
+          "lessons": [
+            {
+              "id": "frontiers-3",
+              "title": "Quantum computing and emerging architectures",
+              "status": "complete",
+              "lab": "qubit",
+              "assessmentItems": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
