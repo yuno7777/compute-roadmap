@@ -2,6 +2,11 @@
 
 An interactive, first-principles computing curriculum and systems textbook that builds a unified mental model of modern computers—from charge carriers and CMOS transistors up through CPU pipelines, operating systems, compilers, distributed databases, GPU warps, and transformer inference.
 
+## Live Platform & Repository
+
+- **Live Website (Vercel):** [https://compute-roadmap.vercel.app](https://compute-roadmap.vercel.app)
+- **GitHub Repository:** [https://github.com/yuno7777/compute-roadmap](https://github.com/yuno7777/compute-roadmap)
+
 ---
 
 ## Project Goals
