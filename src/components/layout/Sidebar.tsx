@@ -91,6 +91,7 @@ export function Sidebar({
       <div className="flex items-center justify-between border-b border-[var(--border-subtle)] px-4 py-3">
         <Link
           href="/"
+          prefetch={true}
           onClick={isMobile ? onCloseMobile : undefined}
           className="flex items-center gap-2 font-semibold tracking-tight text-[var(--text-primary)] hover:text-[var(--accent-blue)]"
         >
@@ -178,6 +179,7 @@ export function Sidebar({
                         <li key={lesson.slug}>
                           <Link
                             href={`/learn/${lesson.slug}`}
+                            prefetch={true}
                             onClick={isMobile ? onCloseMobile : undefined}
                             aria-current={isActive ? "page" : undefined}
                             className={`flex items-start gap-2 rounded px-2 py-1.5 text-xs transition-colors focus-visible:outline-2 focus-visible:outline-[var(--accent-blue)] ${

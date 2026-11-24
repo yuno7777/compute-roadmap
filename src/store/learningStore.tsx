@@ -415,11 +415,8 @@ function applyDomTheme(theme: LearningState["theme"]): "light" | "dark" {
 
   const root = document.documentElement;
   root.dataset.theme = effective;
-  if (effective === "dark") {
-    root.classList.add("dark");
-  } else {
-    root.classList.remove("dark");
-  }
+  root.classList.toggle("dark", effective === "dark");
+  root.style.colorScheme = effective;
   return effective;
 }
 
@@ -432,18 +429,22 @@ export function LearningProvider({ children }: { children: ReactNode }) {
 
   // Load persisted state from localStorage on client mount
   useEffect(() => {
+    let initialTheme: LearningState["theme"] = "system";
     try {
       const raw = window.localStorage.getItem(LEARNING_STATE_STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
         const validation = validateLearningState(parsed);
         if (validation.ok) {
-          setState(rollDateState(validation.state, getLocalDateKey()));
+          const rolled = rollDateState(validation.state, getLocalDateKey());
+          setState(rolled);
+          initialTheme = rolled.theme;
         }
       }
     } catch {
       // Ignore corrupted localStorage and fall back to defaults
     } finally {
+      setResolvedTheme(applyDomTheme(initialTheme));
       setHydrated(true);
     }
   }, []);
@@ -463,6 +464,7 @@ export function LearningProvider({ children }: { children: ReactNode }) {
 
   // Synchronize theme attribute + .dark class + system media query listener
   useEffect(() => {
+    if (!hydrated) return;
     setResolvedTheme(applyDomTheme(state.theme));
     if (state.theme !== "system" || typeof window === "undefined") {
       return;
@@ -473,7 +475,7 @@ export function LearningProvider({ children }: { children: ReactNode }) {
     };
     mq.addEventListener("change", listener);
     return () => mq.removeEventListener("change", listener);
-  }, [state.theme]);
+  }, [state.theme, hydrated]);
 
   const setTheme = useCallback((theme: LearningState["theme"]) => {
     setState((prev) => ({ ...prev, theme }));

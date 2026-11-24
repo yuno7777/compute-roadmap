@@ -19,6 +19,8 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const THEME_INIT_SCRIPT = `(function(){try{var raw=localStorage.getItem("compute_learning_state_v1");var theme="system";if(raw){var parsed=JSON.parse(raw);if(parsed&&(parsed.theme==="light"||parsed.theme==="dark"||parsed.theme==="system")){theme=parsed.theme;}}var sysDark=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;var effective=theme==="system"?(sysDark?"dark":"light"):theme;var root=document.documentElement;root.dataset.theme=effective;root.classList.toggle("dark",effective==="dark");root.style.colorScheme=effective;}catch(e){}})();`;
+
 export const metadata: Metadata = {
   title: "COMPUTE — From Electrons to Artificial Intelligence",
   description:
@@ -36,6 +38,9 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${jetbrainsMono.variable}`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
       <body>
         <LearningProvider>
           <AppShell>{children}</AppShell>

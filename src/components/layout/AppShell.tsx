@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { useLearningStore } from "@/store/learningStore";
+import { RoutePreloader } from "./RoutePreloader";
 import { SearchModal } from "./SearchModal";
 import { Sidebar } from "./Sidebar";
 import { TopBar } from "./TopBar";
@@ -52,6 +53,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </div>
 
       <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <RoutePreloader />
     </div>
   );
 }

@@ -56,6 +56,33 @@
   color-scheme: dark;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-canvas: #0a0b0d;
+    --bg-surface: #111317;
+    --bg-subtle: #181b20;
+    --bg-muted: #23272f;
+
+    --text-primary: #f3f4f6;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+
+    --border-subtle: #23272f;
+    --border-strong: #323844;
+
+    --accent-blue: #3b82f6;
+    --accent-blue-soft: #172554;
+    --accent-emerald: #10b981;
+    --accent-emerald-soft: #064e3b;
+    --accent-amber: #f59e0b;
+    --accent-amber-soft: #451a03;
+    --accent-crimson: #ef4444;
+    --accent-crimson-soft: #450a0a;
+
+    color-scheme: dark;
+  }
+}
+
 @layer base {
   html {
     background-color: var(--bg-canvas);

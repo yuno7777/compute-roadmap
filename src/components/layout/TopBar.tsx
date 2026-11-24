@@ -145,6 +145,7 @@ export function TopBar({
                   ) : (
                     <Link
                       href={crumb.href}
+                      prefetch={true}
                       className="hover:text-[var(--text-primary)]"
                     >
                       {crumb.label}
@@ -171,6 +172,7 @@ export function TopBar({
                   <Link
                     key={link.href}
                     href={link.href}
+                    prefetch={true}
                     className={`rounded px-2.5 py-1 text-xs font-medium transition-colors ${
                       active
                         ? "bg-[var(--accent-blue-soft)] text-[var(--accent-blue)]"
@@ -249,6 +251,7 @@ export function TopBar({
               <Link
                 key={link.href}
                 href={link.href}
+                prefetch={true}
                 className={`whitespace-nowrap rounded px-2 py-1 text-xs font-medium ${
                   active
                     ? "bg-[var(--accent-blue-soft)] text-[var(--accent-blue)]"
