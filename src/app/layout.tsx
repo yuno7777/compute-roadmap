@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import type { ReactNode } from "react";
+import { Analytics } from "@vercel/analytics/next";
 import { AppShell } from "@/components/layout/AppShell";
 import { LearningProvider } from "@/store/learningStore";
 import "katex/dist/katex.min.css";
@@ -45,6 +46,7 @@ export default function RootLayout({
         <LearningProvider>
           <AppShell>{children}</AppShell>
         </LearningProvider>
+        <Analytics />
       </body>
     </html>
   );
