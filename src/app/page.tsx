@@ -17,19 +17,25 @@ import { DOMAINS, TRACKS, getDomainsByTrack } from "@/data/domains";
 import { SIMULATOR_CATALOG } from "@/data/simulators";
 import {
   getDomainMastery,
+  getLessonsCompletedTodayCount,
   getRecommendedNextLesson,
   getTrackMastery,
 } from "@/lib/curriculumGraph";
 import { useLearningStore } from "@/store/learningStore";
 
 export default function HomePage() {
-  const { state } = useLearningStore();
+  const { state, hydrated } = useLearningStore();
 
   const completedCount = useMemo(
     () =>
       CURRICULUM_PLAN.filter((e) => state.completedLessons[e.slug]?.completed)
         .length,
     [state.completedLessons]
+  );
+
+  const completedTodayCount = useMemo(
+    () => (hydrated ? getLessonsCompletedTodayCount(state.completedLessons) : 0),
+    [hydrated, state.completedLessons]
   );
 
   const recommended = useMemo(
@@ -152,10 +158,18 @@ export default function HomePage() {
               />
             </div>
 
-            <p className="mt-2 text-xs text-[var(--text-muted)] swiss-tabular">
-              Overall mastery: {completedCount} / {CURRICULUM_PLAN.length} lessons
-              completed
-            </p>
+            <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-xs text-[var(--text-muted)] swiss-tabular">
+              <span>
+                Completed today:{" "}
+                <span className="font-mono font-medium text-[var(--text-primary)]">
+                  {completedTodayCount} lesson
+                  {completedTodayCount === 1 ? "" : "s"}
+                </span>
+              </span>
+              <span>
+                Total: {completedCount}/{CURRICULUM_PLAN.length}
+              </span>
+            </div>
           </div>
 
           {recommended && (

@@ -19,6 +19,9 @@ export const TRACK_1_LESSONS: Lesson[] = [
     difficulty: "beginner",
     status: "complete",
     prerequisites: [],
+    simulatorId: "pn-diode-charge",
+    simulatorPrompt:
+      "In the PN Junction, Carrier Drift & Diode Lab, switch to Charge & Electron Drift mode, vary total charge Q, transit time t, and carrier polarity, and compare slow electron drift velocity against conventional current direction.",
     objectives: [
       "Distinguish quantized electric charge from continuous fluid analogies and compute net charge in coulombs.",
       "Explain how Coulomb's law and electric fields transmit forces across space without physical contact.",
@@ -958,6 +961,9 @@ Energy per 0->1->0 cycle = 200.0 fJ`,
     difficulty: "intermediate",
     status: "complete",
     prerequisites: ["what-is-an-electron", "voltage-current-circuits"],
+    simulatorId: "pn-diode-charge",
+    simulatorPrompt:
+      "In the PN Junction, Carrier Drift & Diode Lab, select PN Junction & Shockley Diode mode, sweep donor/acceptor doping densities and applied bias from reverse to forward voltage, and observe depletion-barrier narrowing and exponential I-V turn-on.",
     objectives: [
       "Explain why pure crystalline silicon (4 valence electrons, 1.12 eV band gap) is a poor conductor at room temperature.",
       "Compare n-type donor doping (phosphorus/arsenic) and p-type acceptor doping (boron) in terms of majority carriers.",
@@ -1554,6 +1560,9 @@ V_DD=0.80V, V_th=0.20V -> P_dyn=3.84 uW, RelDelay=1.55, RelLeak=58.17x`,
     difficulty: "intermediate",
     status: "complete",
     prerequisites: ["mosfets-and-cmos-logic"],
+    simulatorId: "chiplet-yield-qubit",
+    simulatorPrompt:
+      "In the Lithography Yield, Chiplets & Qubit Error Lab, open Poisson Die Yield & Chiplets mode and compare an 800 mm^2 monolithic die against multi-tile chiplets as defect density D0 increases.",
     objectives: [
       "Trace the silicon manufacturing pipeline from Czochralski ingot growth to FEOL transistors and BEOL copper interconnect stacks.",
       "Apply Rayleigh's resolution equation (CD = k1 * lambda / NA) to explain the shift from 193 nm DUV to 13.5 nm EUV lithography.",

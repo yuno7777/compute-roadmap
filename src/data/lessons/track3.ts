@@ -1691,6 +1691,9 @@ int main(void) {
     difficulty: "intermediate",
     status: "complete",
     prerequisites: ["stacks-calling-conventions-abi", "virtual-memory-paging-tlb"],
+    simulatorId: "runtime-memory-eventloop",
+    simulatorPrompt:
+      "Open the Memory Ownership, GC & Event-Loop Lab in Rust/C Ownership & Lifetimes mode: step through Move, Shared Borrow (&T), Mutable Borrow (&mut T), and Clone to compare heap allocation counts, borrow exclusivity checks, and deterministic drop order.",
     objectives: [
       "Contrast stack-frame allocation, static `.data`/`.bss` storage, and dynamic heap allocation over OS `brk`/`mmap` arenas.",
       "Explain how general-purpose allocators (size classes, thread-local caches, slab headers) and bump/arena allocators manage fragmentation and contention.",
@@ -2030,6 +2033,9 @@ println!("{}", first);`,
     difficulty: "intermediate",
     status: "complete",
     prerequisites: ["c-and-rust-memory-models"],
+    simulatorId: "runtime-memory-eventloop",
+    simulatorPrompt:
+      "Use the Memory Ownership, GC & Event-Loop Lab to inspect Python Object Identity (comparing alias vs. shallow copy vs. deep copy mutations) and step through the JS/TS Event Loop to observe microtask checkpoints draining before macrotask timer callbacks.",
     objectives: [
       "Compare reference counting (CPython) against tracing garbage collection (mark-sweep, copying/generational GC in V8/JVM).",
       "Explain why cycles break naive reference counting and how generational GCs use write barriers and remembered sets.",

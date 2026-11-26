@@ -19,6 +19,9 @@ const TRACK_5_LESSONS: Lesson[] = [
     difficulty: "intermediate",
     status: "complete",
     prerequisites: ["ieee-754-floating-point", "asymptotics-recurrences-graphs"],
+    simulatorId: "calculus-entropy",
+    simulatorPrompt:
+      "Open the Calculus & Information Theory Lab in Numerical Differentiation mode to compare forward vs. central finite-difference errors as step size h shrinks into IEEE-754 subtractive cancellation.",
     objectives: [
       "Compose 3D scaling, rotation, and translation inside 4x4 homogeneous transformation matrices.",
       "Distinguish dot products, cross products, orthogonal bases, and matrix rank geometrically.",
@@ -1962,6 +1965,9 @@ Tiled GEMM (128x128) | AI= 42.67 F/B |  142.9 TF/s | Memory-bound`,
     difficulty: "intermediate",
     status: "complete",
     prerequisites: ["encoding-compression-ecc", "linear-algebra-calculus-for-computing"],
+    simulatorId: "calculus-entropy",
+    simulatorPrompt:
+      "Open the Calculus & Information Theory Lab in Shannon Entropy & Cross-Entropy mode to vary true vs. predicted probabilities and compare entropy H(p), surprise -log2(p), cross-entropy H(p, q), and KL divergence.",
     objectives: [
       "Compute conditional probabilities and posterior beliefs using Bayes' theorem.",
       "Derive MSE and Cross-Entropy loss directly from Maximum Likelihood Estimation (MLE).",
@@ -4158,6 +4164,9 @@ Updated fixed-size state h_t: [1.02 0.7  0.34 1.21] | y_t: 1.5025`,
     difficulty: "advanced",
     status: "complete",
     prerequisites: ["transformers-tokenization-embeddings", "distributed-consensus-raft"],
+    simulatorId: "llm-training-objective",
+    simulatorPrompt:
+      "Launch the LLM Training Objectives Lab to compare Pretraining Cross-Entropy / NLL against expected reward, KL-regularized RLHF objectives, and DPO preference margins as beta and policy probabilities shift.",
     objectives: [
       "Apply the Chinchilla compute budget law C ~ 6 N D to balance parameter count N against pretraining tokens D.",
       "Calculate mixed-precision BF16 + AdamW memory requirements (16N bytes) and distribute them across Tensor, Pipeline, and ZeRO Data Parallelism.",
@@ -4875,6 +4884,9 @@ INT8 q: [-64, 12, 127] | max error: 0.005`,
     difficulty: "advanced",
     status: "complete",
     prerequisites: ["semiconductor-fabrication", "inference-kv-cache-quantization"],
+    simulatorId: "chiplet-yield-qubit",
+    simulatorPrompt:
+      "Open the Chiplets, Yield & Quantum Interference Lab to compare monolithic vs. multi-tile chiplet Poisson die yield and step through single-qubit Hadamard/Z interference (H Z H |0⟩ = |1⟩ vs. H H |0⟩ = |0⟩).",
     objectives: [
       "Apply the Rayleigh lithography equation CD = k1 * lambda / NA to explain High-NA EUV (13.5 nm, 0.55 NA) and GAAFET nanosheet scaling.",
       "Explain why reticle limits and defect yields force modern processors into CoWoS/UCIe multi-chiplet 2.5D/3D packages.",

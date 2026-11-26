@@ -13,6 +13,7 @@ export const CURRICULUM_PLAN: CurriculumPlanEntry[] = [
     moduleTitle: "Module 1: Physical Foundations of Electricity",
     chapterTitle: "Chapter 1: Matter, Charge & Signals",
     prerequisites: [],
+    simulatorId: "pn-diode-charge",
   },
   {
     number: 2,
@@ -45,6 +46,7 @@ export const CURRICULUM_PLAN: CurriculumPlanEntry[] = [
     moduleTitle: "Module 2: Semiconductors & Transistor Switches",
     chapterTitle: "Chapter 2: From Silicon to CMOS",
     prerequisites: ["what-is-an-electron", "voltage-current-circuits"],
+    simulatorId: "pn-diode-charge",
   },
   {
     number: 5,
@@ -66,6 +68,7 @@ export const CURRICULUM_PLAN: CurriculumPlanEntry[] = [
     moduleTitle: "Module 2: Semiconductors & Transistor Switches",
     chapterTitle: "Chapter 2: From Silicon to CMOS",
     prerequisites: ["mosfets-and-cmos-logic"],
+    simulatorId: "chiplet-yield-qubit",
   },
   {
     number: 7,
@@ -308,6 +311,7 @@ export const CURRICULUM_PLAN: CurriculumPlanEntry[] = [
     moduleTitle: "Module 10: Programming Languages, Compilers & Runtimes",
     chapterTitle: "Chapter 10: Memory Models, Parsing & Codegen",
     prerequisites: ["stacks-calling-conventions-abi", "virtual-memory-paging-tlb"],
+    simulatorId: "runtime-memory-eventloop",
   },
   {
     number: 29,
@@ -318,6 +322,7 @@ export const CURRICULUM_PLAN: CurriculumPlanEntry[] = [
     moduleTitle: "Module 10: Programming Languages, Compilers & Runtimes",
     chapterTitle: "Chapter 10: Memory Models, Parsing & Codegen",
     prerequisites: ["c-and-rust-memory-models"],
+    simulatorId: "runtime-memory-eventloop",
   },
   {
     number: 30,
@@ -497,6 +502,7 @@ export const CURRICULUM_PLAN: CurriculumPlanEntry[] = [
     moduleTitle: "Module 16: Graphics Pipelines & GPU Architecture",
     chapterTitle: "Chapter 16: Transforms, Shaders & SIMT Hardware",
     prerequisites: ["ieee-754-floating-point", "asymptotics-recurrences-graphs"],
+    simulatorId: "calculus-entropy",
   },
   {
     number: 46,
@@ -551,6 +557,7 @@ export const CURRICULUM_PLAN: CurriculumPlanEntry[] = [
     moduleTitle: "Module 17: Statistical & Classical Machine Learning",
     chapterTitle: "Chapter 17: Probability, Loss & Classical Models",
     prerequisites: ["encoding-compression-ecc", "linear-algebra-calculus-for-computing"],
+    simulatorId: "calculus-entropy",
   },
   {
     number: 51,
@@ -619,6 +626,7 @@ export const CURRICULUM_PLAN: CurriculumPlanEntry[] = [
     moduleTitle: "Module 19: AI Systems & Computing Frontiers",
     chapterTitle: "Chapter 19: Training Clusters, Inference & Future Silicon",
     prerequisites: ["transformers-tokenization-embeddings", "distributed-consensus-raft"],
+    simulatorId: "llm-training-objective",
   },
   {
     number: 57,
@@ -640,6 +648,7 @@ export const CURRICULUM_PLAN: CurriculumPlanEntry[] = [
     moduleTitle: "Module 19: AI Systems & Computing Frontiers",
     chapterTitle: "Chapter 19: Training Clusters, Inference & Future Silicon",
     prerequisites: ["semiconductor-fabrication", "inference-kv-cache-quantization"],
+    simulatorId: "chiplet-yield-qubit",
   },
 ];
 

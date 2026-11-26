@@ -1,12 +1,12 @@
 "use client";
 
-import { ArrowLeft, CheckCircle2, Cpu } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Cpu, Info } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { getSimulatorComponent } from "@/components/simulators/registry";
 import { getCurriculumPlanEntry } from "@/data/curriculumPlan";
 import { getDomainById } from "@/data/domains";
-import { getSimulatorById } from "@/data/simulators";
+import { SIMULATOR_CATALOG, getSimulatorById } from "@/data/simulators";
 import type { SimulatorId } from "@/types/simulator";
 
 export function LabRunnerClient({ simulatorId }: { simulatorId: SimulatorId }) {
@@ -24,7 +24,7 @@ export function LabRunnerClient({ simulatorId }: { simulatorId: SimulatorId }) {
             className="inline-flex items-center gap-1 text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text-primary)]"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
-            All 21 Labs
+            All {SIMULATOR_CATALOG.length} Labs
           </Link>
           <div className="mt-2 flex flex-wrap items-center gap-2">
             <span className="inline-flex items-center gap-1 rounded border border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-2 py-0.5 font-mono text-[10px] uppercase text-[var(--accent-blue)]">
@@ -94,6 +94,25 @@ export function LabRunnerClient({ simulatorId }: { simulatorId: SimulatorId }) {
             </p>
           </div>
         </div>
+      )}
+
+      {meta?.modelBoundaries && (
+        <aside
+          aria-label="Model scope and boundaries"
+          className="rounded-lg border border-[var(--border-strong)] bg-[var(--bg-subtle)] p-4 text-xs"
+        >
+          <div className="flex items-start gap-2.5">
+            <Info className="mt-0.5 h-4 w-4 shrink-0 text-[var(--text-muted)]" />
+            <div>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                Model Scope &amp; Boundaries
+              </p>
+              <p className="mt-1 leading-relaxed text-[var(--text-secondary)]">
+                {meta.modelBoundaries}
+              </p>
+            </div>
+          </div>
+        </aside>
       )}
 
       <SimulatorComponent

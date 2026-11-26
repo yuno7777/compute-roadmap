@@ -14,7 +14,7 @@ An interactive, first-principles computing curriculum and systems textbook that 
 - **Zero black boxes:** Every layer connects mechanically to the layer below it—voltage thresholds explain logic gates, cache lines explain data-structure performance, virtual memory explains container isolation, and GPU warps explain LLM inference bottlenecks.
 - **Just-in-time mathematics:** Boolean algebra launches right before digital circuits (Track 1); linear algebra, vector calculus, probability, and information theory launch right before 3D graphics and machine learning (Track 5).
 - **Swiss-textbook clarity:** Distraction-free light (`#FAFAFA`) and dark (`#0A0B0D`) reading modes, KaTeX mathematical typesetting, deterministic `@xyflow/react` dependency graphs, and explicit *Simplified Educational Model vs. Real Hardware/Software* comparisons in every lesson.
-- **Active mastery:** 21 deterministic interactive simulators, 10 assessment question types (including interactive simulation challenges), SM-2 spaced repetition, mistake logging, and 6 comprehensive track exams.
+- **Active mastery:** 27 deterministic interactive simulators (each with explicit *Model Scope & Boundaries* notes), 10 assessment question types (including interactive simulation challenges), SM-2 spaced repetition, domain/track-scoped adaptive practice, mistake logging, daily lesson/minute tracking, and 6 comprehensive track exams.
 
 ---
 
@@ -35,36 +35,42 @@ The full canonical inventory is generated in [`CURRICULUM_MANIFEST.json`](./CURR
 
 ---
 
-## 21 Interactive Simulators
+## 27 Interactive Simulators
 
 All simulation math lives in pure, deterministic TypeScript modules under `src/lib/simulators/` and is rendered by React components in `src/components/simulators/`:
 
-### Hardware & Architecture (8 Labs)
+### Hardware, Silicon & Frontiers (10 Labs)
 1. **Ohm's Law & RC Timing Lab** (`ohm-circuit`) — Voltage, resistance, power dissipation, and RC charge waveforms
-2. **MOSFET & CMOS Inverter Sandbox** (`mosfet-cmos`) — $V_{GS}$ thresholds, VTC curves, and static vs. dynamic power
-3. **Digital Logic & Flip-Flop Bench** (`logic-gates`) — Universal NAND/NOR/XOR gates, 4-bit ripple adder, and clocked D flip-flops
-4. **Two's Complement & IEEE-754 Bit Inspector** (`binary-float`) — Sign/exponent/mantissa bit editing, subnormals, NaN, and rounding error
-5. **ALU & Register File Datapath** (`alu-register`) — Opcode execution, status flags (`Z`, `N`, `C`, `V`), and register writeback
-6. **Fetch-Decode-Execute CPU Simulator** (`cpu-fde`) — Cycle-by-cycle PC, IR, and register file tracing on RISC assembly
-7. **Set-Associative Cache & Coherence Lab** (`cache-memory`) — Tag/index/offset breakdown, LRU eviction, and MESI coherence states
-8. **5-Stage Pipeline & Hazard Visualizer** (`pipeline-hazard`) — `IF/ID/EX/MEM/WB` stalls, EX-to-EX forwarding, and branch flushes
+2. **Charge Drift & PN Junction Diode Lab** (`pn-diode-charge`) — Electron drift vs. conventional current ($I=Q/t$) and Shockley diode forward/reverse bias I–V curves
+3. **MOSFET & CMOS Inverter Sandbox** (`mosfet-cmos`) — $V_{GS}$ thresholds, VTC curves, and static vs. dynamic power
+4. **Digital Logic & Flip-Flop Bench** (`logic-gates`) — Universal NAND/NOR/XOR gates, 4-bit ripple adder, and clocked D flip-flops
+5. **Two's Complement & IEEE-754 Bit Inspector** (`binary-float`) — Sign/exponent/mantissa bit editing, subnormals, NaN, and rounding error
+6. **ALU & Register File Datapath** (`alu-register`) — Opcode execution, status flags (`Z`, `N`, `C`, `V`), and register writeback
+7. **Fetch-Decode-Execute CPU Simulator** (`cpu-fde`) — Cycle-by-cycle PC, IR, and register file tracing on RISC assembly
+8. **Set-Associative Cache & Coherence Lab** (`cache-memory`) — Tag/index/offset breakdown, LRU eviction, and MESI coherence states
+9. **5-Stage Pipeline & Hazard Visualizer** (`pipeline-hazard`) — `IF/ID/EX/MEM/WB` stalls, EX-to-EX forwarding, and branch flushes
+10. **Chiplet Yield & Single-Qubit Interference Lab** (`chiplet-yield-qubit`) — Poisson defect-limited die yield ($Y=e^{-AD}$) vs. chiplets and `H`/`X`/`Z` single-qubit amplitude interference
 
-### Systems, Networking & Security (8 Labs)
-9. **MMU, Page Table & TLB Translator** (`virtual-memory`) — VPN/offset splits, TLB hits/misses, page walks, and LRU replacement
-10. **OS Process Scheduler & Syscall Tracer** (`os-scheduler`) — Round-Robin, SJF, and MLFQ timelines with I/O bursts
-11. **Lexer, Parser, AST & SSA IR Explorer** (`compiler-pipeline`) — Tokenization, ASTs, constant folding, and dead-code elimination
-12. **Graph & Sorting Algorithm Animator** (`algorithms`) — Step-by-step Dijkstra, BFS/DFS, Quicksort, and Mergesort
-13. **TCP Sliding Window & Congestion Lab** (`network-tcp`) — Handshakes, packet drops, AIMD `cwnd` dynamics, and RTT estimation
-14. **B+ Tree & LSM-Tree Storage Engine Lab** (`database-storage`) — Page splits, memtables, SSTable compaction, and read/write amplification
-15. **Raft Consensus & Atomics Simulator** (`concurrency-raft`) — Leader elections, network partitions, terms, and log replication quorums
-16. **Diffie-Hellman, AES & Signature Inspector** (`crypto-security`) — Modular key exchange, avalanche diffusion, and HMAC verification
+### Systems, Runtimes, Networking & Security (9 Labs)
+11. **MMU, Page Table & TLB Translator** (`virtual-memory`) — VPN/offset splits, TLB hits/misses, page walks, and LRU replacement
+12. **OS Process Scheduler & Syscall Tracer** (`os-scheduler`) — Round-Robin, SJF, and MLFQ timelines with I/O bursts
+13. **Ownership, Object Identity & Event Loop Lab** (`runtime-memory-eventloop`) — Rust/C ownership & borrow checking, Python alias/shallow/deep copies, and JS/TS microtask vs. timer event-loop stepping
+14. **Lexer, Parser, AST & SSA IR Explorer** (`compiler-pipeline`) — Tokenization, ASTs, constant folding, and dead-code elimination
+15. **Graph & Sorting Algorithm Animator** (`algorithms`) — Step-by-step Dijkstra, BFS/DFS, Quicksort, and Mergesort
+16. **TCP Sliding Window & Congestion Lab** (`network-tcp`) — Handshakes, packet drops, AIMD `cwnd` dynamics, and RTT estimation
+17. **B+ Tree & LSM-Tree Storage Engine Lab** (`database-storage`) — Page splits, memtables, SSTable compaction, and read/write amplification
+18. **Raft Consensus & Atomics Simulator** (`concurrency-raft`) — Leader elections, network partitions, terms, and log replication quorums
+19. **Diffie-Hellman, AES & Signature Inspector** (`crypto-security`) — Modular key exchange, avalanche diffusion, and HMAC verification
 
-### Graphics, GPUs & Modern AI (5 Labs)
-17. **2D/3D Triangle Rasterizer & Shader Bench** (`graphics-rasterizer`) — MVP transforms, barycentric interpolation, and Z-buffering
-18. **GPU SIMT Warp & Memory Coalescing Lab** (`gpu-warp`) — 32-thread warp active masks, branch divergence, and shared-memory banks
-19. **Computation Graph & Backprop Playground** (`neural-backprop`) — Forward activations, chain-rule gradients, and 2D decision boundaries
-20. **Scaled Dot-Product Attention Visualizer** (`transformer-attention`) — $Q, K, V$ projections, causal masking, and $1/\sqrt{d_k}$ softmax heatmaps
-21. **KV-Cache & Quantization Memory Calculator** (`quantization-kv`) — FP16/BF16/INT8/INT4 memory footprints, GQA ratios, and roofline metrics
+### Math, Graphics, GPUs & Modern AI (8 Labs)
+20. **Numerical Differentiation & Shannon Entropy Lab** (`calculus-entropy`) — Forward vs. central finite-difference error & IEEE-754 cancellation, plus binary entropy $H(p)$, cross-entropy $H(p,q)$, and KL divergence
+21. **2D/3D Triangle Rasterizer & Shader Bench** (`graphics-rasterizer`) — MVP transforms, barycentric interpolation, and Z-buffering
+22. **GPU SIMT Warp & Memory Coalescing Lab** (`gpu-warp`) — 32-thread warp active masks, branch divergence, and shared-memory banks
+23. **Computation Graph & Backprop Playground** (`neural-backprop`) — Forward activations, chain-rule gradients, and 2D decision boundaries
+24. **BPE Tokenizer & Embedding Explorer** (`bpe-tokenizer`) — Step-by-step Byte-Pair Encoding merges (fixed & greedy dynamic), pair frequencies, and 2D token embeddings
+25. **Scaled Dot-Product Attention Visualizer** (`transformer-attention`) — $Q, K, V$ projections, causal masking, and $1/\sqrt{d_k}$ softmax heatmaps
+26. **LLM Pretraining, RLHF & DPO Objective Lab** (`llm-training-objective`) — Next-token NLL bits vs. expected reward, KL-regularized RLHF, DPO preference margins, and Chinchilla scaling
+27. **KV-Cache & Quantization Memory Calculator** (`quantization-kv`) — FP16/BF16/INT8/INT4 memory footprints, GQA ratios, and roofline metrics
 
 ---
 
@@ -79,7 +85,7 @@ src/
 │   ├── layout/               # AppShell, Sidebar, TopBar, SearchModal (Cmd/Ctrl+K)
 │   ├── lesson/               # LessonView, InteractiveDiagram, CodeExampleCard, LessonNotesDrawer
 │   ├── math/                 # KaTeX MathText & MathBlock components
-│   └── simulators/           # 21 interactive lab components + SIMULATOR_REGISTRY
+│   └── simulators/           # 27 interactive lab components + SIMULATOR_REGISTRY
 ├── data/
 │   ├── curriculumPlan.ts     # Canonical 58-lesson DAG registry (slugs, prerequisites, domains, simulators)
 │   ├── domains.ts            # TRACKS (6) and DOMAINS (24) metadata

@@ -9,7 +9,7 @@ import { SIMULATOR_CATALOG } from "@/data/simulators";
 import type { SimulatorCategory } from "@/types/simulator";
 
 const CATEGORIES: Array<{ id: SimulatorCategory | "all"; label: string }> = [
-  { id: "all", label: "All 21 Labs" },
+  { id: "all", label: `All ${SIMULATOR_CATALOG.length} Labs` },
   { id: "hardware", label: "Hardware & Silicon" },
   { id: "systems", label: "OS, Compilers & Distributed" },
   { id: "graphics-ai", label: "Graphics, GPUs & AI" },

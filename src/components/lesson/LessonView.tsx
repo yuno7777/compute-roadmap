@@ -14,6 +14,7 @@ import {
   Clock,
   ExternalLink,
   FileText,
+  Info,
   Layers,
   ListChecks,
 } from "lucide-react";
@@ -337,6 +338,25 @@ export function LessonView({ lesson }: LessonViewProps) {
                 </Link>
               )}
             </div>
+
+            {simulatorMeta?.modelBoundaries && (
+              <aside
+                aria-label="Model scope and boundaries"
+                className="rounded-lg border border-[var(--border-strong)] bg-[var(--bg-subtle)] px-4 py-3 text-xs"
+              >
+                <div className="flex items-start gap-2.5">
+                  <Info className="mt-0.5 h-4 w-4 shrink-0 text-[var(--text-muted)]" />
+                  <div>
+                    <p className="font-mono text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                      Model Scope &amp; Boundaries
+                    </p>
+                    <p className="mt-1 leading-relaxed text-[var(--text-secondary)]">
+                      {simulatorMeta.modelBoundaries}
+                    </p>
+                  </div>
+                </div>
+              </aside>
+            )}
 
             {simChallengeVerified && (
               <div className="rounded border border-[var(--accent-emerald)] bg-[var(--accent-emerald-soft)] px-3.5 py-2 text-xs font-medium text-[var(--accent-emerald)]">

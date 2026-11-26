@@ -5,23 +5,25 @@ import {
   Award,
   Brain,
   CheckCircle2,
+  Filter,
   Layers,
+  RotateCcw,
   RotateCw,
   Target,
 } from "lucide-react";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { AssessmentEngine } from "@/components/assessment/AssessmentEngine";
 import { MathText } from "@/components/math/MathText";
 import { getCurriculumPlanEntry } from "@/data/curriculumPlan";
-import { TRACKS } from "@/data/domains";
+import { DOMAINS, TRACKS, getDomainById } from "@/data/domains";
 import { ALL_TRACK_EXAMS } from "@/data/exams";
 import { ALL_LESSONS } from "@/data/lessons";
 import { getWeakConceptTags } from "@/lib/curriculumGraph";
 import { getDueCards } from "@/lib/spacedRepetition";
 import { useLearningStore } from "@/store/learningStore";
 import type { AssessmentQuestion } from "@/types/assessment";
-import type { TrackId } from "@/types/curriculum";
+import type { DomainId, TrackId } from "@/types/curriculum";
 
 type ReviewTab = "sm2" | "mistakes" | "weak" | "flashcards" | "exams";
 
@@ -41,6 +43,27 @@ export default function ReviewPage() {
   const [flashcardIndex, setFlashcardIndex] = useState(0);
   const [flashcardFlipped, setFlashcardFlipped] = useState(false);
   const [selectedExamTrack, setSelectedExamTrack] = useState<TrackId>("track-1");
+  const [scopeTrack, setScopeTrack] = useState<TrackId | "all">("all");
+  const [scopeDomain, setScopeDomain] = useState<DomainId | "all">("all");
+
+  const availableDomains = useMemo(() => {
+    if (scopeTrack === "all") return DOMAINS;
+    return DOMAINS.filter((d) => d.trackId === scopeTrack);
+  }, [scopeTrack]);
+
+  const matchesScope = useCallback(
+    (lessonSlug?: string, explicitTrackId?: TrackId) => {
+      if (scopeTrack === "all" && scopeDomain === "all") return true;
+      const entry = lessonSlug ? getCurriculumPlanEntry(lessonSlug) : undefined;
+      const resolvedTrack = explicitTrackId ?? entry?.trackId;
+      const resolvedDomain = entry?.domainId;
+
+      if (scopeTrack !== "all" && resolvedTrack !== scopeTrack) return false;
+      if (scopeDomain !== "all" && resolvedDomain !== scopeDomain) return false;
+      return true;
+    },
+    [scopeTrack, scopeDomain]
+  );
 
   const questionIndex = useMemo(() => {
     const map = new Map<
@@ -71,32 +94,97 @@ export default function ReviewPage() {
   }, []);
 
   const dueCards = useMemo(
-    () => getDueCards(state.reviewCards),
-    [state.reviewCards]
+    () =>
+      getDueCards(state.reviewCards).filter((card) =>
+        matchesScope(card.lessonSlug)
+      ),
+    [state.reviewCards, matchesScope]
   );
 
   const unresolvedMistakes = useMemo(
-    () => state.mistakes.filter((m) => !m.resolved),
-    [state.mistakes]
+    () =>
+      state.mistakes.filter(
+        (m) => !m.resolved && matchesScope(m.lessonSlug, m.trackId)
+      ),
+    [state.mistakes, matchesScope]
+  );
+
+  const scopedMistakes = useMemo(
+    () =>
+      state.mistakes.filter((m) => matchesScope(m.lessonSlug, m.trackId)),
+    [state.mistakes, matchesScope]
   );
 
   const weakTags = useMemo(
-    () => getWeakConceptTags(state.mistakes, 8),
-    [state.mistakes]
+    () => getWeakConceptTags(scopedMistakes, 8),
+    [scopedMistakes]
   );
 
-  const adaptiveQuestions = useMemo(() => {
-    const weakSet = new Set(weakTags.map((w) => w.conceptTag));
-    const collected: AssessmentQuestion[] = [];
-    for (const lesson of ALL_LESSONS) {
-      for (const q of lesson.assessments) {
-        if (weakSet.has(q.conceptTag)) {
-          collected.push(q);
+  const { adaptiveQuestions, prioritizedMistakeCount, prioritizedDueCount } =
+    useMemo(() => {
+      const seen = new Set<string>();
+      const collected: AssessmentQuestion[] = [];
+      let mistakeCount = 0;
+      let dueCount = 0;
+
+      const pushUnique = (q: AssessmentQuestion | undefined): boolean => {
+        if (!q || seen.has(q.id) || collected.length >= 10) return false;
+        seen.add(q.id);
+        collected.push(q);
+        return true;
+      };
+
+      // 1. Prioritize unresolved mistakes in the selected scope
+      for (const mistake of unresolvedMistakes) {
+        const entry = questionIndex.get(mistake.questionId);
+        if (pushUnique(entry?.question)) {
+          mistakeCount += 1;
         }
       }
-    }
-    return collected.slice(0, 8);
-  }, [weakTags]);
+
+      // 2. Prioritize due SM-2 cards in the selected scope
+      for (const card of dueCards) {
+        const entry = questionIndex.get(card.questionId);
+        if (pushUnique(entry?.question)) {
+          dueCount += 1;
+        }
+      }
+
+      // 3. Questions matching weak concept tags in scope
+      const weakSet = new Set(weakTags.map((w) => w.conceptTag));
+      for (const lesson of ALL_LESSONS) {
+        if (!matchesScope(lesson.slug, lesson.trackId)) continue;
+        for (const q of lesson.assessments) {
+          if (weakSet.has(q.conceptTag)) {
+            pushUnique(q);
+          }
+        }
+      }
+
+      // 4. When scoped to a specific Track or Domain, fill up to 10 module/domain items
+      if (scopeTrack !== "all" || scopeDomain !== "all") {
+        for (const lesson of ALL_LESSONS) {
+          if (!matchesScope(lesson.slug, lesson.trackId)) continue;
+          for (const q of lesson.assessments) {
+            pushUnique(q);
+          }
+        }
+      }
+
+      return {
+        adaptiveQuestions: collected,
+        prioritizedMistakeCount: mistakeCount,
+        prioritizedDueCount: dueCount,
+      };
+    }, [
+      unresolvedMistakes,
+      dueCards,
+      weakTags,
+      questionIndex,
+      matchesScope,
+      scopeTrack,
+      scopeDomain,
+    ]);
 
   const flashcards = useMemo(() => {
     const cards: Array<{
@@ -128,7 +216,14 @@ export default function ReviewPage() {
   const tabs: Array<{ id: ReviewTab; label: string; count?: number }> = [
     { id: "sm2", label: "SM-2 Due Queue", count: dueCards.length },
     { id: "mistakes", label: "Mistake Drill", count: unresolvedMistakes.length },
-    { id: "weak", label: "Weak-Topic Practice", count: weakTags.length },
+    {
+      id: "weak",
+      label: "Adaptive Practice",
+      count:
+        scopeTrack !== "all" || scopeDomain !== "all"
+          ? adaptiveQuestions.length
+          : weakTags.length,
+    },
     { id: "flashcards", label: "Revision Flashcards", count: flashcards.length },
     { id: "exams", label: "Track Exams", count: ALL_TRACK_EXAMS.length },
   ];
@@ -138,7 +233,19 @@ export default function ReviewPage() {
     ? questionIndex.get(activeDueCard.questionId)
     : undefined;
 
-  const activeFlashcard = flashcards[flashcardIndex % Math.max(1, flashcards.length)];
+  const activeFlashcard =
+    flashcards[flashcardIndex % Math.max(1, flashcards.length)];
+
+  const scopeLabel = useMemo(() => {
+    if (scopeDomain !== "all") {
+      return getDomainById(scopeDomain)?.title ?? scopeDomain;
+    }
+    if (scopeTrack !== "all") {
+      const t = TRACKS.find((tr) => tr.id === scopeTrack);
+      return t ? `Track ${t.number}: ${t.title}` : scopeTrack;
+    }
+    return "All Domains";
+  }, [scopeTrack, scopeDomain]);
 
   return (
     <div className="mx-auto max-w-5xl space-y-6 px-4 py-8 sm:px-6">
@@ -150,7 +257,7 @@ export default function ReviewPage() {
           Spaced Repetition, Mistake Drills &amp; Track Exams
         </h1>
         <p className="mt-2 text-sm text-[var(--text-secondary)]">
-          Strengthen long-term retention with SM-2 scheduling, resolve past errors, and pass cumulative Track examinations.
+          Strengthen long-term retention with SM-2 scheduling, resolve past errors, run domain-scoped adaptive practice, and pass cumulative Track examinations.
         </p>
       </header>
 
@@ -186,6 +293,67 @@ export default function ReviewPage() {
         })}
       </div>
 
+      {/* Domain / Track Scope Bar for SM-2, Mistakes, and Adaptive Practice */}
+      {(activeTab === "sm2" ||
+        activeTab === "mistakes" ||
+        activeTab === "weak") && (
+        <div className="swiss-card flex flex-wrap items-center gap-3 p-3.5">
+          <div className="flex items-center gap-1.5 text-xs font-medium text-[var(--text-muted)]">
+            <Filter className="h-3.5 w-3.5" />
+            <span>Practice Scope</span>
+          </div>
+
+          <select
+            aria-label="Filter practice by track"
+            value={scopeTrack}
+            onChange={(e) => {
+              setScopeTrack(e.target.value as TrackId | "all");
+              setScopeDomain("all");
+            }}
+            className="rounded border border-[var(--border-subtle)] bg-[var(--bg-canvas)] px-2.5 py-1.5 text-xs text-[var(--text-primary)]"
+          >
+            <option value="all">All 6 Tracks</option>
+            {TRACKS.map((t) => (
+              <option key={t.id} value={t.id}>
+                Track {t.number}: {t.title}
+              </option>
+            ))}
+          </select>
+
+          <select
+            aria-label="Filter practice by domain"
+            value={scopeDomain}
+            onChange={(e) =>
+              setScopeDomain(e.target.value as DomainId | "all")
+            }
+            className="rounded border border-[var(--border-subtle)] bg-[var(--bg-canvas)] px-2.5 py-1.5 text-xs text-[var(--text-primary)]"
+          >
+            <option value="all">
+              All Domains ({availableDomains.length})
+            </option>
+            {availableDomains.map((d) => (
+              <option key={d.id} value={d.id}>
+                {d.order}. {d.title}
+              </option>
+            ))}
+          </select>
+
+          {(scopeTrack !== "all" || scopeDomain !== "all") && (
+            <button
+              type="button"
+              onClick={() => {
+                setScopeTrack("all");
+                setScopeDomain("all");
+              }}
+              className="inline-flex items-center gap-1 rounded border border-[var(--border-subtle)] px-2.5 py-1 text-xs text-[var(--text-secondary)] hover:bg-[var(--bg-subtle)]"
+            >
+              <RotateCcw className="h-3 w-3" />
+              All Domains
+            </button>
+          )}
+        </div>
+      )}
+
       {/* 1. SM-2 Spaced Repetition Queue */}
       {activeTab === "sm2" && (
         <section className="space-y-4">
@@ -193,7 +361,7 @@ export default function ReviewPage() {
             <div className="swiss-card p-8 text-center">
               <Brain className="mx-auto h-7 w-7 text-[var(--accent-emerald)]" />
               <h2 className="mt-2 text-base font-semibold">
-                All SM-2 cards are caught up
+                All SM-2 cards in {scopeLabel} are caught up
               </h2>
               <p className="mt-1 text-xs text-[var(--text-muted)]">
                 Total cards tracked:{" "}
@@ -208,7 +376,7 @@ export default function ReviewPage() {
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--border-subtle)] pb-3">
                 <div>
                   <span className="font-mono text-[11px] uppercase tracking-wider text-[var(--accent-blue)]">
-                    Due Card 1 of {dueCards.length}
+                    Due Card 1 of {dueCards.length} ({scopeLabel})
                   </span>
                   <p className="text-xs text-[var(--text-muted)]">
                     Lesson:{" "}
@@ -321,7 +489,7 @@ export default function ReviewPage() {
             <div className="swiss-card p-8 text-center">
               <CheckCircle2 className="mx-auto h-7 w-7 text-[var(--accent-emerald)]" />
               <h2 className="mt-2 text-base font-semibold">
-                No unresolved mistakes logged
+                No unresolved mistakes logged in {scopeLabel}
               </h2>
               <p className="mt-1 text-xs text-[var(--text-muted)]">
                 Any missed quiz or exam question is recorded here for targeted follow-up.
@@ -385,45 +553,61 @@ export default function ReviewPage() {
         </section>
       )}
 
-      {/* 3. Weak-Topic Adaptive Practice */}
+      {/* 3. Domain-Scoped & Weak-Topic Adaptive Practice */}
       {activeTab === "weak" && (
         <section className="space-y-4">
-          {weakTags.length === 0 ? (
+          {weakTags.length > 0 && (
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {weakTags.map((tag) => (
+                <div key={tag.conceptTag} className="swiss-card p-4">
+                  <p className="font-mono text-xs font-semibold text-[var(--accent-amber)]">
+                    #{tag.conceptTag}
+                  </p>
+                  <p className="mt-1 font-mono text-lg font-semibold swiss-tabular">
+                    {tag.unresolvedCount} open
+                  </p>
+                  <p className="text-[11px] text-[var(--text-muted)]">
+                    {tag.totalCount} total misses
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {adaptiveQuestions.length === 0 ? (
             <div className="swiss-card p-8 text-center">
               <Target className="mx-auto h-7 w-7 text-[var(--accent-blue)]" />
               <h2 className="mt-2 text-base font-semibold">
-                No weak concept tags detected yet
+                Select a Track or Domain above for focused practice
               </h2>
               <p className="mt-1 text-xs text-[var(--text-muted)]">
-                Complete lesson assessments and track exams to surface concepts needing extra practice.
+                No weak concept tags or due cards are queued across all domains yet. Choose any of the 6 Tracks or 24 Domains above to drill module questions immediately.
               </p>
             </div>
           ) : (
-            <>
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                {weakTags.map((tag) => (
-                  <div key={tag.conceptTag} className="swiss-card p-4">
-                    <p className="font-mono text-xs font-semibold text-[var(--accent-amber)]">
-                      #{tag.conceptTag}
-                    </p>
-                    <p className="mt-1 font-mono text-lg font-semibold swiss-tabular">
-                      {tag.unresolvedCount} open
-                    </p>
-                    <p className="text-[11px] text-[var(--text-muted)]">
-                      {tag.totalCount} total misses
-                    </p>
-                  </div>
-                ))}
+            <div className="space-y-3">
+              <div className="swiss-card flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 text-xs text-[var(--text-secondary)]">
+                <span>
+                  Scope:{" "}
+                  <strong className="font-semibold text-[var(--text-primary)]">
+                    {scopeLabel}
+                  </strong>
+                </span>
+                <span className="font-mono text-[11px] text-[var(--text-muted)] swiss-tabular">
+                  Prioritizing {prioritizedMistakeCount} unresolved mistake
+                  {prioritizedMistakeCount === 1 ? "" : "s"} ·{" "}
+                  {prioritizedDueCount} due SM-2 card
+                  {prioritizedDueCount === 1 ? "" : "s"}
+                </span>
               </div>
 
-              {adaptiveQuestions.length > 0 && (
-                <AssessmentEngine
-                  questions={adaptiveQuestions}
-                  mode="practice"
-                  title="Adaptive Practice Set (Targeted Weak Tags)"
-                />
-              )}
-            </>
+              <AssessmentEngine
+                key={`${scopeTrack}-${scopeDomain}`}
+                questions={adaptiveQuestions}
+                mode="practice"
+                title={`Adaptive Practice Set · ${scopeLabel}`}
+              />
+            </div>
           )}
         </section>
       )}

@@ -371,3 +371,32 @@ export function getWeakConceptTags(
     })
     .slice(0, limit);
 }
+
+/**
+ * Format a Date into a local calendar YYYY-MM-DD key.
+ */
+export function getLocalDateKey(date: Date = new Date()): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+/**
+ * Count how many lessons have `completedAt` on today's local calendar day.
+ */
+export function getLessonsCompletedTodayCount(
+  completedLessons: Record<string, LessonProgress>,
+  now: Date = new Date()
+): number {
+  const todayKey = getLocalDateKey(now);
+  let count = 0;
+  for (const progress of Object.values(completedLessons)) {
+    if (!progress.completed || !progress.completedAt) continue;
+    const parsed = new Date(progress.completedAt);
+    if (!Number.isNaN(parsed.getTime()) && getLocalDateKey(parsed) === todayKey) {
+      count += 1;
+    }
+  }
+  return count;
+}

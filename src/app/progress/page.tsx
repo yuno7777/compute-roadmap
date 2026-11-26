@@ -13,12 +13,17 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { CURRICULUM_PLAN, getCurriculumPlanEntry } from "@/data/curriculumPlan";
 import { DOMAINS, TRACKS } from "@/data/domains";
-import { getDomainMastery, getTrackMastery } from "@/lib/curriculumGraph";
+import {
+  getDomainMastery,
+  getLessonsCompletedTodayCount,
+  getTrackMastery,
+} from "@/lib/curriculumGraph";
 import { useLearningStore } from "@/store/learningStore";
 
 export default function ProgressPage() {
   const {
     state,
+    hydrated,
     setDailyGoalMinutes,
     exportLearningState,
     importLearningState,
@@ -37,6 +42,11 @@ export default function ProgressPage() {
       CURRICULUM_PLAN.filter((e) => state.completedLessons[e.slug]?.completed)
         .length,
     [state.completedLessons]
+  );
+
+  const completedTodayCount = useMemo(
+    () => (hydrated ? getLessonsCompletedTodayCount(state.completedLessons) : 0),
+    [hydrated, state.completedLessons]
   );
 
   const handleDownloadJson = () => {
@@ -133,7 +143,9 @@ export default function ProgressPage() {
             {state.streakDays}d
           </p>
           <p className="mt-1 text-xs text-[var(--text-muted)] swiss-tabular">
-            {state.todayMinutes} / {state.dailyGoalMinutes} min today
+            {state.todayMinutes} / {state.dailyGoalMinutes} min ·{" "}
+            {completedTodayCount} lesson{completedTodayCount === 1 ? "" : "s"}{" "}
+            today
           </p>
         </div>
 

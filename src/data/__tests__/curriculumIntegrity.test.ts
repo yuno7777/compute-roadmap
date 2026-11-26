@@ -449,8 +449,8 @@ describe("Curriculum Integrity & Completeness", () => {
   });
 
   it("ensures every simulatorId in lessons and SIMULATOR_CATALOG resolves to a real component in SIMULATOR_REGISTRY", () => {
-    expect(SIMULATOR_CATALOG).toHaveLength(21);
-    expect(Object.keys(SIMULATOR_REGISTRY)).toHaveLength(21);
+    expect(SIMULATOR_CATALOG).toHaveLength(27);
+    expect(Object.keys(SIMULATOR_REGISTRY)).toHaveLength(27);
 
     const errors: string[] = [];
 
