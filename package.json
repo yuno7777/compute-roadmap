@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "@xyflow/react": "^13.0.3",
     "katex": "^0.19.1",
     "lucide-react": "^1.78.0",
