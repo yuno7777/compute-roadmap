@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useMemo } from "react";
+import { ComputeLogo } from "@/components/layout/ComputeLogo";
 import { CURRICULUM_PLAN } from "@/data/curriculumPlan";
 import { DOMAINS, TRACKS, getDomainsByTrack } from "@/data/domains";
 import { SIMULATOR_CATALOG } from "@/data/simulators";
@@ -72,9 +73,12 @@ export default function HomePage() {
       <section className="grid gap-6 lg:grid-cols-3">
         <div className="swiss-card flex flex-col justify-between p-6 lg:col-span-2">
           <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-[var(--accent-blue)]">
-              COMPUTE · First-Principles Computing Curriculum
-            </p>
+            <div className="flex items-center gap-2.5">
+              <ComputeLogo size={26} />
+              <p className="font-mono text-xs uppercase tracking-widest text-[var(--accent-blue)]">
+                COMPUTE · First-Principles Computing Curriculum
+              </p>
+            </div>
             <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
               From Electrons to Artificial Intelligence
             </h1>

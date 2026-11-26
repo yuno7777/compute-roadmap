@@ -5,7 +5,6 @@ import {
   ChevronDown,
   ChevronRight,
   Circle,
-  Cpu,
   PanelLeftClose,
 } from "lucide-react";
 import Link from "next/link";
@@ -15,6 +14,7 @@ import { CURRICULUM_PLAN } from "@/data/curriculumPlan";
 import { TRACKS } from "@/data/domains";
 import { useLearningStore } from "@/store/learningStore";
 import type { TrackId } from "@/types/curriculum";
+import { ComputeLogo } from "./ComputeLogo";
 
 export interface SidebarProps {
   desktopOpen: boolean;
@@ -95,7 +95,7 @@ export function Sidebar({
           onClick={isMobile ? onCloseMobile : undefined}
           className="flex items-center gap-2 font-semibold tracking-tight text-[var(--text-primary)] hover:text-[var(--accent-blue)]"
         >
-          <Cpu className="h-4 w-4 text-[var(--accent-blue)]" />
+          <ComputeLogo size={22} />
           <span className="font-mono text-sm tracking-wider">COMPUTE</span>
         </Link>
         <button

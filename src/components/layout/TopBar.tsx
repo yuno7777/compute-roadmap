@@ -18,6 +18,7 @@ import { getDomainById, getTrackById } from "@/data/domains";
 import { getSimulatorById } from "@/data/simulators";
 import { useLearningStore } from "@/store/learningStore";
 import type { SimulatorId } from "@/types/simulator";
+import { ComputeLogo } from "./ComputeLogo";
 
 const PRIMARY_NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -136,19 +137,25 @@ export function TopBar({
             {breadcrumbs.map((crumb, idx) => {
               const isLast = idx === breadcrumbs.length - 1;
               return (
-                <span key={`${crumb.href}-${idx}`} className="flex items-center gap-1 whitespace-nowrap">
+                <span key={`${crumb.href}-${idx}`} className="flex items-center gap-1.5 whitespace-nowrap">
                   {idx > 0 && <ChevronRight className="h-3.5 w-3.5 shrink-0" />}
                   {isLast ? (
-                    <span className="font-medium text-[var(--text-primary)]">
-                      {crumb.label}
+                    <span className="inline-flex items-center gap-1.5 font-medium text-[var(--text-primary)]">
+                      {idx === 0 && <ComputeLogo size={20} />}
+                      <span className={idx === 0 ? "font-mono tracking-wider font-semibold" : ""}>
+                        {crumb.label}
+                      </span>
                     </span>
                   ) : (
                     <Link
                       href={crumb.href}
                       prefetch={true}
-                      className="hover:text-[var(--text-primary)]"
+                      className="inline-flex items-center gap-1.5 hover:text-[var(--text-primary)]"
                     >
-                      {crumb.label}
+                      {idx === 0 && <ComputeLogo size={20} />}
+                      <span className={idx === 0 ? "font-mono tracking-wider font-semibold text-[var(--text-primary)]" : ""}>
+                        {crumb.label}
+                      </span>
                     </Link>
                   )}
                 </span>
