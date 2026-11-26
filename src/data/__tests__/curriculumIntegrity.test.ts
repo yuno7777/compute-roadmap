@@ -5,6 +5,7 @@ import { DOMAINS, TRACKS } from "@/data/domains";
 import { ALL_TRACK_EXAMS } from "@/data/exams";
 import { ALL_GLOSSARY_TERMS } from "@/data/glossary";
 import { ALL_LESSONS } from "@/data/lessons";
+import { PLAIN_ENGLISH_GUIDES } from "@/data/plainEnglish";
 import { SIMULATOR_CATALOG } from "@/data/simulators";
 import type { AssessmentQuestion } from "@/types/assessment";
 import type { Lesson } from "@/types/curriculum";
@@ -519,5 +520,36 @@ describe("Curriculum Integrity & Completeness", () => {
     }
 
     expect(errors).toEqual([]);
+  });
+
+  it("provides a Plain-English guide, system interactions, and >= 3 decoded symbols/terms for every lesson", () => {
+    const violations: string[] = [];
+
+    for (const lesson of ALL_LESSONS) {
+      const guide = PLAIN_ENGLISH_GUIDES[lesson.slug];
+      if (!guide) {
+        violations.push(`Missing PlainEnglishGuide for "${lesson.slug}"`);
+        continue;
+      }
+      if (!guide.bigPicture?.trim() || guide.bigPicture.trim().length < 80) {
+        violations.push(`Short/empty bigPicture for "${lesson.slug}"`);
+      }
+      if (
+        !guide.howItInteracts?.trim() ||
+        guide.howItInteracts.trim().length < 60
+      ) {
+        violations.push(`Short/empty howItInteracts for "${lesson.slug}"`);
+      }
+      if (!guide.symbolDecoder || guide.symbolDecoder.length < 3) {
+        violations.push(
+          `PlainEnglishGuide for "${lesson.slug}" needs >= 3 decoded concepts/symbols`
+        );
+      }
+      violations.push(
+        ...findPlaceholderMatches(guide, `PlainEnglishGuide(${lesson.slug})`)
+      );
+    }
+
+    expect(violations).toEqual([]);
   });
 });

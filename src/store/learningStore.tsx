@@ -46,7 +46,7 @@ export function createDefaultLearningState(
     todayMinutes: 0,
     streakDays: 0,
     lastActiveDate: todayKey,
-    explanationMode: "intermediate",
+    explanationMode: "beginner",
     theme: "system",
     distractionFree: false,
     bookmarks: [],

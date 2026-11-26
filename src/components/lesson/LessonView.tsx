@@ -4,6 +4,7 @@ import {
   AlertTriangle,
   ArrowLeft,
   ArrowRight,
+  BookOpen,
   Bookmark,
   BookmarkCheck,
   CheckCircle2,
@@ -12,6 +13,7 @@ import {
   ChevronRight,
   Circle,
   Clock,
+  Compass,
   ExternalLink,
   FileText,
   Info,
@@ -26,8 +28,9 @@ import { getSimulatorComponent } from "@/components/simulators/registry";
 import { CURRICULUM_PLAN, getCurriculumPlanEntry } from "@/data/curriculumPlan";
 import { getDomainById, getTrackById } from "@/data/domains";
 import { ALL_GLOSSARY_TERMS } from "@/data/glossary";
+import { getPlainEnglishGuide } from "@/data/plainEnglish";
 import { getSimulatorById } from "@/data/simulators";
-import { getUnmetPrerequisites } from "@/lib/curriculumGraph";
+import { getDependents, getUnmetPrerequisites } from "@/lib/curriculumGraph";
 import { useLearningStore } from "@/store/learningStore";
 import type { DifficultyLevel, Lesson } from "@/types/curriculum";
 import { CodeExampleCard } from "./CodeExampleCard";
@@ -35,9 +38,9 @@ import { InteractiveDiagram } from "./InteractiveDiagram";
 import { LessonNotesDrawer } from "./LessonNotesDrawer";
 
 const EXPLANATION_MODES: Array<{ id: DifficultyLevel; label: string }> = [
-  { id: "beginner", label: "Beginner" },
-  { id: "intermediate", label: "Intermediate" },
-  { id: "advanced", label: "Advanced" },
+  { id: "beginner", label: "Plain English" },
+  { id: "intermediate", label: "Engineering" },
+  { id: "advanced", label: "Formal" },
 ];
 
 export interface LessonViewProps {
@@ -59,6 +62,13 @@ export function LessonView({ lesson }: LessonViewProps) {
   const [showAllMechanisms, setShowAllMechanisms] = useState(false);
   const [deepDiveOpen, setDeepDiveOpen] = useState(false);
   const [simChallengeVerified, setSimChallengeVerified] = useState(false);
+  const [plainGuideOpen, setPlainGuideOpen] = useState(true);
+  const [termsUpFrontOpen, setTermsUpFrontOpen] = useState(true);
+
+  useEffect(() => {
+    setPlainGuideOpen(state.explanationMode !== "advanced");
+    setTermsUpFrontOpen(state.explanationMode === "beginner");
+  }, [state.explanationMode]);
 
   useEffect(() => {
     markLessonVisited(lesson.slug);
@@ -102,6 +112,16 @@ export function LessonView({ lesson }: LessonViewProps) {
     const ids = new Set(lesson.glossaryTermIds);
     return ALL_GLOSSARY_TERMS.filter((t) => ids.has(t.id));
   }, [lesson.glossaryTermIds]);
+
+  const plainGuide = useMemo(
+    () => getPlainEnglishGuide(lesson.slug),
+    [lesson.slug]
+  );
+
+  const downstreamLessons = useMemo(
+    () => getDependents(lesson.slug, CURRICULUM_PLAN),
+    [lesson.slug]
+  );
 
   const currentMechanism = lesson.mechanisms[mechanismIndex];
 
@@ -310,6 +330,145 @@ export function LessonView({ lesson }: LessonViewProps) {
             ))}
           </div>
         </section>
+
+        {/* Plain-English Guide, System Interactions & Symbol Decoder */}
+        {plainGuide && (
+          <section className="swiss-card overflow-hidden">
+            <button
+              type="button"
+              aria-expanded={plainGuideOpen}
+              onClick={() => setPlainGuideOpen((prev) => !prev)}
+              className="flex w-full items-center justify-between gap-2 px-5 py-4 text-left hover:bg-[var(--bg-subtle)]"
+            >
+              <div className="flex items-start gap-2.5">
+                <Compass className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent-blue)]" />
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--accent-blue)]">
+                    Plain-English Guide · No Heavy Math Needed
+                  </p>
+                  <h2 className="mt-0.5 text-base font-semibold">
+                    What&apos;s Really Going On, How It Connects &amp; Symbol Decoder
+                  </h2>
+                </div>
+              </div>
+              <ChevronDown
+                className={`h-4 w-4 shrink-0 text-[var(--text-muted)] transition-transform ${
+                  plainGuideOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            {plainGuideOpen && (
+              <div className="space-y-4 border-t border-[var(--border-subtle)] px-5 py-4 text-sm">
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="rounded-md border border-[var(--border-subtle)] bg-[var(--bg-canvas)] p-4">
+                    <p className="font-mono text-[10px] font-semibold uppercase tracking-wider text-[var(--accent-blue)]">
+                      The Big Picture in Everyday Words
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
+                      <MathText text={plainGuide.bigPicture} />
+                    </p>
+                  </div>
+
+                  <div className="rounded-md border border-[var(--border-subtle)] bg-[var(--bg-canvas)] p-4">
+                    <p className="font-mono text-[10px] font-semibold uppercase tracking-wider text-[var(--accent-emerald)]">
+                      How It Interacts Across the System
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
+                      <MathText text={plainGuide.howItInteracts} />
+                    </p>
+                  </div>
+                </div>
+
+                {plainGuide.symbolDecoder.length > 0 && (
+                  <div>
+                    <p className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                      Physics, Math &amp; Concept Decoder
+                    </p>
+                    <div className="grid gap-2.5 sm:grid-cols-2">
+                      {plainGuide.symbolDecoder.map((item, idx) => (
+                        <div
+                          key={idx}
+                          className="rounded-md border border-[var(--border-subtle)] bg-[var(--bg-subtle)] p-3"
+                        >
+                          <div className="flex flex-wrap items-baseline justify-between gap-2">
+                            <span className="font-mono text-xs font-semibold text-[var(--text-primary)]">
+                              {item.symbol}
+                            </span>
+                            <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--accent-blue)]">
+                              {item.plainName}
+                            </span>
+                          </div>
+                          <p className="mt-1.5 text-xs leading-relaxed text-[var(--text-secondary)]">
+                            <MathText text={item.whatItMeans} />
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* Key Terms Defined Up Front (before Technical Theory) */}
+        {glossaryTerms.length > 0 && (
+          <section className="swiss-card overflow-hidden">
+            <button
+              type="button"
+              aria-expanded={termsUpFrontOpen}
+              onClick={() => setTermsUpFrontOpen((prev) => !prev)}
+              className="flex w-full items-center justify-between gap-2 px-5 py-3.5 text-left hover:bg-[var(--bg-subtle)]"
+            >
+              <div className="flex items-center gap-2.5">
+                <BookOpen className="h-4 w-4 shrink-0 text-[var(--accent-emerald)]" />
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-muted)]">
+                    Vocabulary Primer · {glossaryTerms.length} Terms
+                  </p>
+                  <h2 className="text-sm font-semibold">
+                    Key Terms Defined Before You Dive Into Theory
+                  </h2>
+                </div>
+              </div>
+              <ChevronDown
+                className={`h-4 w-4 shrink-0 text-[var(--text-muted)] transition-transform ${
+                  termsUpFrontOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            {termsUpFrontOpen && (
+              <div className="grid gap-3 border-t border-[var(--border-subtle)] px-5 py-4 sm:grid-cols-2">
+                {glossaryTerms.map((term) => (
+                  <div
+                    key={term.id}
+                    className="rounded-md border border-[var(--border-subtle)] bg-[var(--bg-canvas)] p-3.5 text-xs"
+                  >
+                    <p className="font-semibold text-[var(--text-primary)]">
+                      {term.term}
+                    </p>
+                    <p className="mt-1 font-medium text-[var(--text-secondary)]">
+                      <MathText text={term.shortDefinition} />
+                    </p>
+                    {term.detailedExplanation &&
+                      term.detailedExplanation !== term.shortDefinition && (
+                        <p className="mt-1.5 leading-relaxed text-[var(--text-muted)]">
+                          <MathText text={term.detailedExplanation} />
+                        </p>
+                      )}
+                    {term.formulaLatex && (
+                      <div className="mt-2 rounded border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-2.5 py-1.5">
+                        <MathBlock latex={term.formulaLatex} />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+        )}
 
         {/* Interactive Diagram */}
         {lesson.diagram && <InteractiveDiagram diagram={lesson.diagram} />}
@@ -558,6 +717,28 @@ export function LessonView({ lesson }: LessonViewProps) {
                 );
               })}
             </ul>
+
+            {downstreamLessons.length > 0 && (
+              <div className="mt-4 border-t border-[var(--border-subtle)] pt-3.5">
+                <p className="font-mono text-[10px] font-semibold uppercase tracking-wider text-[var(--accent-emerald)]">
+                  Where This Goes Next (Lessons Building Directly on This)
+                </p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {downstreamLessons.map((dep) => (
+                    <Link
+                      key={dep.slug}
+                      href={`/learn/${dep.slug}`}
+                      className="inline-flex items-center gap-1.5 rounded border border-[var(--border-subtle)] bg-[var(--bg-canvas)] px-2.5 py-1 text-xs font-medium text-[var(--text-primary)] hover:border-[var(--accent-blue)] hover:text-[var(--accent-blue)]"
+                    >
+                      <span className="font-mono text-[10px] text-[var(--text-muted)]">
+                        #{dep.number}
+                      </span>
+                      {dep.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </section>
         )}
 
